@@ -1,5 +1,20 @@
 import nodemailer from "nodemailer";
 
+transporter.verify((error, success)=>{
+
+    if(error){
+
+        console.log("SMTP ERROR:");
+        console.log(error);
+
+    }else{
+
+        console.log("SMTP SERVER READY");
+
+    }
+
+});
+
 const transporter = nodemailer.createTransport({
 
     service: "gmail",
