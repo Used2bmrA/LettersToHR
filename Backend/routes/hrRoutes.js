@@ -1,6 +1,5 @@
 import express from "express";
-import transporter from "../config/mailer.js";
-
+import resend from "../config/email.js";
 
 const router = express.Router();
 
@@ -8,7 +7,6 @@ const router = express.Router();
 router.post("/hr-contact", async (req,res)=>{
 
     try {
-
         const {
             anonymous,
             category,
@@ -19,16 +17,11 @@ router.post("/hr-contact", async (req,res)=>{
             department
         } = req.body;
 
-
-
         let emailContent;
 
-
-
         if(anonymous){
-
             emailContent = `
-            
+       
             <h2>Anonymous HR Message</h2>
 
             <p>
@@ -100,15 +93,15 @@ router.post("/hr-contact", async (req,res)=>{
 
 
 
-        await transporter.sendMail({
+        await resend.emails.send({
 
-            from: process.env.EMAIL_USER,
+            from: "HR Contact <onboarding@resend.dev>",
 
             to: process.env.HR_EMAIL,
 
-            subject:`[HR CONTACT] ${subject}`,
+            subject: `[HR CONTACT] ${subject}`,
 
-            html:emailContent
+            html: emailContent
 
         });
 
