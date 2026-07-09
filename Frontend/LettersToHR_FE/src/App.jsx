@@ -9,6 +9,7 @@ export default function ContactHR() {
   const [anonymous, setAnonymous] = useState(true);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const [form, setForm] = useState({
     category: "",
@@ -32,7 +33,7 @@ export default function ContactHR() {
     try {
       setSending(true);
 
-      await axios.post("http://localhost:3000/api/hr-contact", {
+      await axios.post(`${API_URL}/api/hr-contact`, {
         ...form,
         anonymous,
       });
